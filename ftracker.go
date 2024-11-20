@@ -93,20 +93,13 @@ const (
     walkingSpeedHeightMultiplier    = 0.029 // множитель роста.
 )
 
-// WalkingSpentCalories возвращает количество потраченных калорий при ходьбе.
-//
-// Параметры:
-//
-// action int — количество совершенных действий(число шагов при ходьбе и беге, либо гребков при плавании).
-// duration float64 — длительность тренировки в часах.
-// weight float64 — вес пользователя.
-// height float64 — рост пользователя.
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
     if duration == 0 {
         return 0
     }
-    speed := meanSpeed(action, duration) // Получаем среднюю скорость
-    return ((walkingCaloriesWeightMultiplier * weight + math.Pow(speed*1000/3600, 2) / (height/100) * walkingSpeedHeightMultiplier * weight) * duration * minInH)
+    speedInKmH := meanSpeed(action, duration)  // Средняя скорость в км/ч
+    speedInMsec := speedInKmH * kmhInMsec      // Переводим в м/с
+    return ((walkingCaloriesWeightMultiplier * weight + (math.Pow(speedInMsec, 2) / height) * walkingSpeedHeightMultiplier * weight) * duration * minInH)
 }
 
 // Константы для расчета калорий, расходуемых при плавании.
