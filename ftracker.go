@@ -83,7 +83,7 @@ func RunningSpentCalories(action int, weight, duration float64) float64 {
     if duration == 0 {
         return 0
     }
-    speed := meanSpeed(action, duration) // Получаем среднюю скорость
+    speed := meanSpeed(action, duration)
     return ((runningCaloriesMeanSpeedMultiplier * speed * runningCaloriesMeanSpeedShift) * weight / mInKm * duration * minInH)
 }
 
@@ -97,8 +97,8 @@ func WalkingSpentCalories(action int, duration, weight, height float64) float64 
     if duration == 0 {
         return 0
     }
-    speedInKmH := meanSpeed(action, duration)  // Средняя скорость в км/ч
-    speedInMsec := speedInKmH * kmhInMsec      // Переводим в м/с
+    speedInKmH := meanSpeed(action, duration)  
+    speedInMsec := speedInKmH * kmhInMsec 
     return ((walkingCaloriesWeightMultiplier * weight + (math.Pow(speedInMsec, 2) / (height/100)) * walkingSpeedHeightMultiplier * weight) * duration * minInH)
 }
 
@@ -134,6 +134,6 @@ func SwimmingSpentCalories(lengthPool, countPool int, duration, weight float64) 
     if duration == 0 {
         return 0
     }
-    speed := swimmingMeanSpeed(lengthPool, countPool, duration) // Получаем среднюю скорость при плавании
+    speed := swimmingMeanSpeed(lengthPool, countPool, duration)
     return (speed + swimmingCaloriesMeanSpeedShift) * swimmingCaloriesWeightMultiplier * weight * duration
 }
