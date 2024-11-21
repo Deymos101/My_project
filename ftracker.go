@@ -87,7 +87,7 @@ func RunningSpentCalories(action int, weight, duration float64) float64 {
     return ((runningCaloriesMeanSpeedMultiplier * speed * runningCaloriesMeanSpeedShift) * weight / mInKm * duration * minInH)
 }
 
-// Константы для расчета калорий, расходуемых при ходьбе.
+// Константы для расчета калорий, расходуемых при ходьбе:
 const (
     walkingCaloriesWeightMultiplier = 0.035 // множитель массы тела.
     walkingSpeedHeightMultiplier    = 0.029 // множитель роста.
